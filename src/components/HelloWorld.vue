@@ -1,18 +1,34 @@
 <template>
+<div>
   <div class="hello">
     <input v-model.number="operand1"/>
     <input v-model.number="operand2"/>
 	= {{result}}
   </div>
-   
-     <div class="keyboard">
-         <button v-on:click="calculate (sum)">+</button>
-         <button v-on:click="calculate (sub)">-</button>
-         <button v-on:click="calculate (div)">/</button>
-         <button v-on:click="calculate (mul)">*</button>
-         <button v-on:click="calculate (exp)">a<sup>n</sup></button>
-         <button v-on:click="calculate (int_div)">целочисленное /</button>
-     </div>
+   <div class="keyboard">
+         <button v-on:click="calculate('sum')">+</button>
+         <button v-on:click="calculate('sub')">-</button>
+         <button v-on:click="calculate('div')">/</button>
+         <button v-on:click="calculate('mul')">*</button>
+         <button v-on:click="calculate('exp')">a<sup>n</sup></button>
+         <button v-on:click="calculate('int_div')">целочисленное /</button>
+    </div>
+  <input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}Отобразить экранную клавиатуру</label>
+  <div id="show">
+	<button v-for="item in myCollection" v-bind:key="item">
+   {{ item }}
+	</button>
+   <input type="radio" id="one" value="Один" v-model="picked">
+<label for="one">Один</label>
+<br>
+<input type="radio" id="two" value="Два" v-model="picked">
+<label for="two">Два</label>
+<br>
+<span>Выбрано: {{ picked }}</span>
+ </div>
+
+  </div>
 </template>
 
 <script>
@@ -23,31 +39,32 @@ export default {
            operand1: 0,
            operand2: 0,
            result: 0,
+           myCollection: [1,2,3,4,5,6,7],
        }   
    },
 	methods: {
 		calculate (op){
 			switch(op) {
-			  case 'sum':  this.result = this.operand1 + this.operand2;
-				break;
+				case 'sum':  this.result = this.operand1 + this.operand2;
+					break;
 
-			  case 'sub':  this.result = this.operand1 - this.operand2;
-				break;
+				case 'sub':  this.result = this.operand1 - this.operand2;
+					break;
 
-			  case 'div':  this.result = this.operand1 / this.operand2;
-				break;
+				case 'div':  this.result = this.operand1 / this.operand2;
+					break;
 
-			  case 'mul':  this.result = this.operand1 * this.operand2;
-				break;
+				case 'mul':  this.result = this.operand1 * this.operand2;
+					break;
 				
-			  case 'exp':  this.result = this.operand1 ** this.operand2;
-				break;
+				case 'exp':  this.result = this.operand1 ** this.operand2;
+					break;
 				
-			  case 'int_div':  this.result = (this.operand1 / this.operand2) - (this.operand1 % this.operand2);
-				break;
+				case 'int_div':  this.result = (this.operand1 - (this.operand1 % this.operand2)) / this.operand2;
+					break;
 				
-			  default:
-				this.result = this.operand1 + this.operand2
+				default:
+					this.result = this.operand1 * this.operand2
 			}
 		}
 	}

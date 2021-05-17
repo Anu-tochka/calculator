@@ -13,6 +13,21 @@
          <button v-on:click="calculate('exp')">a<sup>n</sup></button>
          <button v-on:click="calculate('int_div')">целочисленное /</button>
     </div>
+  <input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}Отобразить экранную клавиатуру</label>
+  <div id="show">
+	<button v-for="item in myCollection" v-bind:key="item">
+   {{ item }}
+	</button>
+   <input type="radio" id="one" value="Один" v-model="picked">
+<label for="one">Один</label>
+<br>
+<input type="radio" id="two" value="Два" v-model="picked">
+<label for="two">Два</label>
+<br>
+<span>Выбрано: {{ picked }}</span>
+ </div>
+
   </div>
 </template>
 
@@ -24,6 +39,7 @@ export default {
            operand1: 0,
            operand2: 0,
            result: 0,
+           myCollection: [1,2,3,4,5,6,7],
        }   
    },
 	methods: {
